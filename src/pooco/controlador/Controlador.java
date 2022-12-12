@@ -53,13 +53,13 @@ public class Controlador {
                     añadirCliente();
                     break;
                 case '2':
-                //    muestraClientes();
+                    muestraClientes();
                     break;
                 case '3':
-                //    showClientesPorTipo("Estandard");
+                    showClientesPorTipo("Estandard");
                     break;
                 case '4':
-                //    showClientesPorTipo("Premium");
+                    showClientesPorTipo("Premium");
                     break;
 
                 }
@@ -168,36 +168,36 @@ public class Controlador {
 //        }
 //    }
 //
-//    private void muestraClientes() {        
-//        clienteVista.showCabecera();
-//        List lista = datos.getListaClientes();   
-//        if (lista!=null){
-//            for(int item=0; item<(lista.size()); item++) {
-//                clienteVista.showClientes(lista.get(item).toString());
-//            }
-//        }  
-//    }
-//
-//    private void showClientesPorTipo(String tipo){
-//        if (tipo.equals("Estandard")) {
-//            clienteVista.showCabeceraSTD();  
-//            List lista = datos.getListaClientesSTD();   
-//            if (lista!=null){
-//                for(int item=0; item<(lista.size()); item++) {
-//                    clienteVista.showClientes(lista.get(item).toString());
-//                }
-//            }         
-//        }
-//        else {
-//            clienteVista.showCabeceraPRM();  
-//            List lista = datos.getListaClientesPRM();   
-//            if (lista!=null){
-//                for(int item=0; item<(lista.size()); item++) {
-//                    clienteVista.showClientes(lista.get(item).toString());
-//                }
-//            }         
-//        }
-//    }
+    private void muestraClientes() {        
+        clienteVista.showCabecera();
+        List lista = datos.getListaClientes();   
+        if (lista!=null){
+            for(int item=0; item<(lista.size()); item++) {
+                clienteVista.showClientes(lista.get(item).toString());
+            }
+        }  
+    }
+
+    private void showClientesPorTipo(String tipo){
+        if (tipo.equals("Estandard")) {
+            clienteVista.showCabeceraSTD();  
+            List lista = datos.getListaClientesSTD();   
+            if (lista!=null){
+                for(int item=0; item<(lista.size()); item++) {
+                    clienteVista.showClientes(lista.get(item).toString());
+                }
+            }         
+        }
+        else {
+            clienteVista.showCabeceraPRM();  
+            List lista = datos.getListaClientesPRM();   
+            if (lista!=null){
+                for(int item=0; item<(lista.size()); item++) {
+                    clienteVista.showClientes(lista.get(item).toString());
+                }
+            }         
+        }
+    }
 //  
 //    private void muestraArticulo() {
 //        String codigo;

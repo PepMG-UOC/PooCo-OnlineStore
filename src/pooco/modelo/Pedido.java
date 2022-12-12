@@ -111,8 +111,19 @@ public class Pedido implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "pooco.modelo.Pedido[ idPedido=" + idPedido + " ]";
-    }
+    public String toString(){
+        return "\n" 
+             + "Numero de Pedido: " + this.idPedido + "\n"
+             + "Fecha y hora: " + this.fechaHora  + "\n"            
+             + "NIF del Cliente: " + this.ideMailPedido + "\n"
+           //  + "Nombre Cliente: " + this.cliente.getNombre() + "\n"
+             + "Codigo Articulo: " + this.idArticuloPedido + "\n" 
+           //  + "Descripcion Articulo: " + this.articulo.getDescripcion() + "\n"
+             + "Cantidad: " + this.cantidad + "\n" 
+          //   + "Pvp Articulo: " + String.valueOf(this.articulo.getPvpVenta())  + "\n"
+           //  + "Coste envio: " + String.valueOf(this.articulo.getGastosEnvio()) + "\n"
+           //  + "Pvp Total: " + String.valueOf(cantidad*this.articulo.getPvpVenta()) 
+                + "\n";              
+    }  
     
 }

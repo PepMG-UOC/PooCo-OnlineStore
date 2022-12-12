@@ -20,6 +20,7 @@ public class Datos {
     private ClienteJpaController clienteJPA = new ClienteJpaController();
     private ClienteestandardJpaController clienteSTDJPA = new ClienteestandardJpaController();
     private ClientepremiumJpaController clientePRMJPA = new ClientepremiumJpaController();
+    private PedidoJpaController pedidoJPA = new PedidoJpaController();
     
     public boolean setArticulo(String codigo, String descripcion, float pvpVenta, float gastosEnviom, int tiempoPreparacion)
     {         
@@ -85,43 +86,39 @@ public class Datos {
         return clienteJPA.findCliente(eMail);       
     }  
     
-//    public List<Cliente> getListaClientes(){              
-//        Cliente cliente;
-//        DaoCliente dao= new ClienteDAOImpl();
-//        try {
-//            List lista = dao.listarSTD();
-//            lista.addAll(dao.listarPRM());
-//            return lista;
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);            
-//        }        
-//    }
-//
-//    
-//
-//    public List<Cliente> getListaClientesSTD(){   
-//        List<Cliente> lista = new ArrayList<>();       
-//        DaoCliente dao= new ClienteDAOImpl();
-//        try {
-//            lista = dao.listarSTD();
-//            
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);            
-//        }
-//        return lista;      
-//    }
-//
-//    public List<Cliente> getListaClientesPRM(){   
-//        List<Cliente> lista = new ArrayList<>();       
-//        DaoCliente dao= new ClienteDAOImpl();
-//        try {
-//            lista = dao.listarPRM();
-//            
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);            
-//        }
-//        return lista;      
-//    }
+    public List<Cliente> getListaClientes(){              
+        //Cliente cliente;        
+        try {
+            List lista = clienteJPA.findClienteEntities();
+            return lista;
+        } catch (Exception e) {
+            throw new RuntimeException(e);            
+        }        
+    }
+
+    
+
+    public List<Cliente> getListaClientesSTD(){   
+        //List<Cliente> lista = new ArrayList<>();         
+        try {
+            List lista = clienteSTDJPA.findClienteestandardEntities();
+            return lista;   
+        } catch (Exception e) {
+            throw new RuntimeException(e);            
+        }
+           
+    }
+
+    public List<Cliente> getListaClientesPRM(){   
+        // List<Cliente> lista = new ArrayList<>();        
+        try {
+            List lista = clientePRMJPA.findClientepremiumEntities();
+            return lista;
+        } catch (Exception e) {
+            throw new RuntimeException(e);            
+        }
+              
+    }
 //
 //    public List<Pedido> getListaPedidos() {
 //        List<Pedido> lista = new ArrayList<>();
