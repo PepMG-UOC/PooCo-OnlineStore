@@ -99,25 +99,44 @@ public class Datos {
     
 
     public List<Cliente> getListaClientesSTD(){   
-        //List<Cliente> lista = new ArrayList<>();         
+        List<Cliente> lista = new ArrayList<>(); 
+        List<Clienteestandard> listaSTD = new ArrayList<>();
+        List<Cliente> listaJoin = new ArrayList<>();
         try {
-            List lista = clienteSTDJPA.findClienteestandardEntities();
-            return lista;   
+            lista = clienteJPA.findClienteEntities();
+            listaSTD = clienteSTDJPA.findClienteestandardEntities();               
         } catch (Exception e) {
             throw new RuntimeException(e);            
         }
+        for(int item=0; item<(lista.size()); item++) {
+            for(int itemSt=0; itemSt<(listaSTD.size()); itemSt++) {
+                if(lista.get(item).getIdeMail().equals(listaSTD.get(itemSt).getIdeMailestandard())) {
+                    listaJoin.add(lista.get(item));
+                }
+            }               
+        }
+        return listaJoin;
            
     }
 
     public List<Cliente> getListaClientesPRM(){   
-        // List<Cliente> lista = new ArrayList<>();        
+        List<Cliente> lista = new ArrayList<>(); 
+        List<Clientepremium> listaPRM = new ArrayList<>();
+        List<Cliente> listaJoin = new ArrayList<>();        
         try {
-            List lista = clientePRMJPA.findClientepremiumEntities();
-            return lista;
+            lista = clienteJPA.findClienteEntities();
+            listaPRM = clientePRMJPA.findClientepremiumEntities();            
         } catch (Exception e) {
             throw new RuntimeException(e);            
         }
-              
+        for(int item=0; item<(lista.size()); item++) {
+            for(int itemSt=0; itemSt<(listaPRM.size()); itemSt++) {
+                if(lista.get(item).getIdeMail().equals(listaPRM.get(itemSt).getIdeMailPremium())) {
+                    listaJoin.add(lista.get(item));
+                }
+            }               
+        }
+        return listaJoin;      
     }
 //
 //    public List<Pedido> getListaPedidos() {
