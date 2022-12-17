@@ -74,7 +74,7 @@ public class Controlador {
             resultado = pedidoVista.menuPrincipal();
             switch (resultado) {
                 case '1':
-                //    añadirPedido();
+                    añadirPedido();
                     break;
                 case '2':
                 //    eliminarPedido();
@@ -130,44 +130,45 @@ public class Controlador {
         clienteVista.introducido(success);             
     }
 
-//    public void añadirPedido()
-//    {          
-//        int numPedido;
-//        String eMail;
-//        String codigo;           
-//        float gastos;  
-//        float descuento;
-//        int cantidad;
-//        boolean success;
-//         
-//        pedidoVista.adCabecera();
-//        numPedido = datos.getNumeroPedido();
-//        numPedido++;
-//        pedidoVista.showNumPedido(numPedido);
-//        eMail = clienteVista.eMailCliente();        
-//        if (datos.clienteByEmail(eMail)==null)
-//        {
-//            clienteVista.warning(eMail,false);
-//            añadirCliente();            
-//        } 
-//        codigo = articuloView.codigoArticulo();         
-//        if (datos.getArticuloByCodigo(codigo)==null)
-//        {
-//            articuloView.warning(codigo,false);
-//            return;
-//        } 
-//        gastos= datos.getArticuloByCodigo(codigo).getGastosEnvio();
-//        descuento = datos.clienteByEmail(eMail).descuentoEnv();
-//        cantidad =  pedidoVista.cantidadPedido();
-//        pedidoVista.showpvpVenta(datos.getArticuloByCodigo(codigo).getPvpVenta(), cantidad);
-//        pedidoVista.showGastosEnvio(gastos, descuento);
-//        success = datos.setPedido(numPedido,datos.getArticuloByCodigo(codigo), cantidad, datos.clienteByEmail(eMail));
-//        if(!success) {
-//            pedidoVista.warning(numPedido,true);
-//            return;
-//        }
-//    }
-//
+    public void añadirPedido()
+    {          
+        int numPedido;
+        String eMail;
+        String codigo;           
+        float gastos;  
+        float descuento;
+        int cantidad;
+        boolean success;
+         
+        pedidoVista.adCabecera();
+        numPedido = datos.getNumeroPedido();
+        numPedido++;
+        pedidoVista.showNumPedido(numPedido);
+        eMail = clienteVista.eMailCliente();        
+        if (datos.clienteByEmail(eMail)==null)
+        {
+            clienteVista.warning(eMail,false);
+            añadirCliente();            
+        } 
+        codigo = articuloView.codigoArticulo();         
+        if (datos.getArticuloByCodigo(codigo)==null)
+        {
+            articuloView.warning(codigo,false);
+            return;
+        } 
+        gastos= datos.getArticuloByCodigo(codigo).getGastosEnvio();
+       // descuento = datos.clienteByEmail(eMail).descuentoEnv();
+        descuento=  datos.cienteTipoByMail(eMail);
+        cantidad =  pedidoVista.cantidadPedido();
+        pedidoVista.showpvpVenta(datos.getArticuloByCodigo(codigo).getPvpVenta(), cantidad);
+        pedidoVista.showGastosEnvio(gastos, descuento);
+        success = datos.setPedido(numPedido,datos.getArticuloByCodigo(codigo), cantidad, datos.clienteByEmail(eMail));
+        if(!success) {
+            pedidoVista.warning(numPedido,true);
+            return;
+        }
+    }
+
     private void muestraClientes() {        
         clienteVista.showCabecera();
         List lista = datos.getListaClientes();   
@@ -324,6 +325,8 @@ public class Controlador {
 //        return -1;
 //    }
 //    
-//       
+// 
+    
+   
     
 }

@@ -29,8 +29,7 @@ public class Datos {
     }
     
     private boolean setArticuloJPA(Articulo articulo) {        
-        try {
-            
+        try {           
             articuloJPA.create(articulo);
         } catch (Exception ex) {
             Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,16 +177,15 @@ public class Datos {
 //        return listaByCliente;
 //    }
 //
-//    public int getNumeroPedido(){
-//        int numPedido=0;
-//        DaoPedido dao= new PedidoDAOImpl();
-//        try {
-//            numPedido=dao.getNumPedido();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);            
-//        }
-//        return numPedido;
-//    }
+    public int getNumeroPedido(){
+        int numPedido=0;        
+        try {
+            numPedido = pedidoJPA.getPedidoCount();            
+        } catch (Exception e) {
+            throw new RuntimeException(e);            
+        }
+        return numPedido;
+    }
 //
 //    public int pedidoByNum(int numPedido){
 //        List<Pedido> lista = new ArrayList<>();
@@ -221,5 +219,7 @@ public class Datos {
 //        }
 //    }
 //        
-    
+    public void cienteTipoByMail(String eMail) {
+       
+   }
 }
