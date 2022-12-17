@@ -1,7 +1,8 @@
 package pooco.modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.sql.*;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Pedido implements Serializable {
     private Integer cantidad;
     @Column(name = "FechaHora")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHora;
+    private Timestamp fechaHora;
     @JoinColumn(name = "idArticuloPedido", referencedColumnName = "idArticulo")
     @ManyToOne
     private Articulo idArticuloPedido;
@@ -43,11 +44,21 @@ public class Pedido implements Serializable {
     @ManyToOne
     private Cliente ideMailPedido;
 
+    //Timestamp ts = new Timestamp(millis);
+    
     public Pedido() {
     }
 
     public Pedido(Integer idPedido) {
         this.idPedido = idPedido;
+    }
+     public Pedido(int numPedido, Articulo articulo, int cantidad, Cliente cliente) {
+        this.idPedido = numPedido;
+        this.idArticuloPedido = articulo;
+        this.cantidad = cantidad;
+        this.ideMailPedido = cliente;
+        LocalDateTime localDateTime = LocalDateTime.now();
+        this.fechaHora = Timestamp.valueOf(localDateTime);       
     }
 
     public Integer getIdPedido() {
@@ -66,11 +77,11 @@ public class Pedido implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Date getFechaHora() {
+    public Timestamp getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(Timestamp fechaHora) {
         this.fechaHora = fechaHora;
     }
 

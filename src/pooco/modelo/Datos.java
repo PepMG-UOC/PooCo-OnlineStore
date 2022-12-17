@@ -65,22 +65,23 @@ public class Datos {
     
     
     
-//
-//
-//    public boolean setPedido(int numPedido, Articulo articulo,int cantidad, Cliente cliente)
-//    {   
-//        boolean success=false;
-//        pedido=new Pedido(numPedido,articulo,cantidad,cliente);
-//        DaoPedido dao= new PedidoDAOImpl();
-//        try {
-//            success = dao.registrar(pedido);            
-//        } catch (Exception e) {
-//            success = false;
-//            throw new RuntimeException(e);
-//        }
-//        return success;
-//    }
-//
+
+
+    public boolean setPedido(int numPedido, Articulo articulo,int cantidad, Cliente cliente)
+    {   
+        boolean success=false;
+        pedido=new Pedido(numPedido,articulo,cantidad,cliente);
+        
+        try {
+            pedidoJPA.create(pedido);            
+            //success = dao.registrar(pedido);            
+        } catch (Exception e) {
+            success = false;
+            throw new RuntimeException(e);
+        }
+        return success;
+    }
+
     public Cliente clienteByEmail(String eMail){
         return clienteJPA.findCliente(eMail);       
     }  
@@ -219,7 +220,69 @@ public class Datos {
 //        }
 //    }
 //        
-    public void cienteTipoByMail(String eMail) {
-       
-   }
+    
+    
+    public Clienteestandard clienteTipoSTD(String eMail) {
+        Cliente miCliente;
+        miCliente=clienteByEmail(eMail);          
+        List<Clienteestandard> listaSTD = new ArrayList<>(); 
+         try {            
+            listaSTD = clienteSTDJPA.findClienteestandardEntities();                       
+        } catch (Exception e) {
+            throw new RuntimeException(e);            
+        } 
+        for(int item=0; item<(listaSTD.size()); item++) {
+            if(miCliente.getIdeMail().equals(listaSTD.get(item).getIdeMailestandard()) ) {                
+                return listaSTD.get(item);             
+            }
+        }
+        return null;    
+    }
+    
+    public Clientepremium clienteTipoPRM(String eMail) {
+        Cliente miCliente;
+        miCliente=clienteByEmail(eMail);          
+        List<Clientepremium> listaPRM = new ArrayList<>(); 
+         try {            
+            listaPRM = clientePRMJPA.findClientepremiumEntities();                       
+        } catch (Exception e) {
+            throw new RuntimeException(e);            
+        } 
+        for(int item=0; item<(listaPRM.size()); item++) {
+            if(miCliente.getIdeMail().equals(listaPRM.get(item).getIdeMailPremium()) ) {                
+                return listaPRM.get(item);             
+            }
+        }
+        return null;    
+    }
+    
+    
+//    public Cliente cienteTipoByMail(String eMail) {
+//        Cliente miCliente;
+//        miCliente=clienteByEmail(eMail);      
+//        
+//        List<Clientepremium> listaPRM = new ArrayList<>();
+//        List<Clienteestandard> listaSTD = new ArrayList<>();        
+//        //List<Cliente> listaJoin = new ArrayList<>();        
+//        try {
+//            //lista = clienteJPA.findClienteEntities();
+//            listaSTD = clienteSTDJPA.findClienteestandardEntities();
+//            listaPRM = clientePRMJPA.findClientepremiumEntities();            
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);            
+//        }    
+//       
+//        for(int item=0; item<(listaSTD.size()); item++) {
+//            if(miCliente.getIdeMail().equals(listaSTD.get(item).getIdeMailestandard()) ) {   
+//               
+//                return listaSTD.get(item);             
+//            }
+//        }        
+//        for(int item=0; item<(listaPRM.size()); item++) {
+//            if(miCliente.getIdeMail().equals(listaPRM.get(item).getIdeMailPremium()) ) {
+//                return listaPRM.get(item);
+//            }            
+//        }            
+//        return null;          
+//   }
 }

@@ -136,7 +136,7 @@ public class Controlador {
         String eMail;
         String codigo;           
         float gastos;  
-        float descuento;
+        float descuento=0f;
         int cantidad;
         boolean success;
          
@@ -158,10 +158,19 @@ public class Controlador {
         } 
         gastos= datos.getArticuloByCodigo(codigo).getGastosEnvio();
        // descuento = datos.clienteByEmail(eMail).descuentoEnv();
-        descuento=  datos.cienteTipoByMail(eMail);
+       if (datos.clienteTipoSTD(eMail)!=null ) {
+            descuento= datos.clienteTipoSTD(eMail).getDescuento();
+       }
+       else if (datos.clienteTipoPRM(eMail)!=null ) {
+           descuento= datos.clienteTipoPRM(eMail).getDescuento();
+       }
+        
+        
         cantidad =  pedidoVista.cantidadPedido();
         pedidoVista.showpvpVenta(datos.getArticuloByCodigo(codigo).getPvpVenta(), cantidad);
+        
         pedidoVista.showGastosEnvio(gastos, descuento);
+        
         success = datos.setPedido(numPedido,datos.getArticuloByCodigo(codigo), cantidad, datos.clienteByEmail(eMail));
         if(!success) {
             pedidoVista.warning(numPedido,true);
