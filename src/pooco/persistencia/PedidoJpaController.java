@@ -19,14 +19,13 @@ public class PedidoJpaController implements Serializable {
     public PedidoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    public PedidoJpaController() {
-          emf= Persistence.createEntityManagerFactory("PooCo-OnlineStorePU");
-    }
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
+    }
+       public PedidoJpaController() {
+          emf= Persistence.createEntityManagerFactory("PooCo-OnlineStorePU");
     }
 
     public void create(Pedido pedido) {

@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-//@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Table(name = "cliente")
 @NamedQueries({
@@ -140,8 +139,7 @@ public class Cliente implements Serializable {
         return " eMail: " + this.ideMail + 
               " Nombre: " + this.nombre +            
               " Domicilio: " + this.domicilio + 
-              " NIF: " + this.nif ;
-       // + " Tipo: " + tipoCliente();
+              " NIF: " + this.nif ;       
     }
     
 }

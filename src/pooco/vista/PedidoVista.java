@@ -120,7 +120,7 @@ public class PedidoVista {
         if (exist) System.out.print(" ya existe.");
         else System.out.print(" no existe");
         System.out.println(); 
-        teclado.nextLine();
+        //teclado.nextLine();
     }    
 
     public void eliminaOk(int numPedido, boolean eliminado){

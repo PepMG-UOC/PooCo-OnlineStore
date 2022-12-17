@@ -1,8 +1,7 @@
 package pooco.modelo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.sql.*;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +35,7 @@ public class Pedido implements Serializable {
     private Integer cantidad;
     @Column(name = "FechaHora")
     @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp fechaHora;
+    private Date fechaHora;
     @JoinColumn(name = "idArticuloPedido", referencedColumnName = "idArticulo")
     @ManyToOne
     private Articulo idArticuloPedido;
@@ -44,8 +43,6 @@ public class Pedido implements Serializable {
     @ManyToOne
     private Cliente ideMailPedido;
 
-    //Timestamp ts = new Timestamp(millis);
-    
     public Pedido() {
     }
 
@@ -57,8 +54,7 @@ public class Pedido implements Serializable {
         this.idArticuloPedido = articulo;
         this.cantidad = cantidad;
         this.ideMailPedido = cliente;
-        LocalDateTime localDateTime = LocalDateTime.now();
-        this.fechaHora = Timestamp.valueOf(localDateTime);       
+        this.fechaHora = new Date();
     }
 
     public Integer getIdPedido() {
@@ -77,11 +73,11 @@ public class Pedido implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Timestamp getFechaHora() {
+    public Date getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Timestamp fechaHora) {
+    public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -127,13 +123,13 @@ public class Pedido implements Serializable {
              + "Numero de Pedido: " + this.idPedido + "\n"
              + "Fecha y hora: " + this.fechaHora  + "\n"            
              + "NIF del Cliente: " + this.ideMailPedido + "\n"
-           //  + "Nombre Cliente: " + this.cliente.getNombre() + "\n"
+             + "Nombre Cliente: " + this.ideMailPedido.getNombre() + "\n"
              + "Codigo Articulo: " + this.idArticuloPedido + "\n" 
-           //  + "Descripcion Articulo: " + this.articulo.getDescripcion() + "\n"
+             + "Descripcion Articulo: " + this.idArticuloPedido.getDescripcion() + "\n"
              + "Cantidad: " + this.cantidad + "\n" 
-          //   + "Pvp Articulo: " + String.valueOf(this.articulo.getPvpVenta())  + "\n"
-           //  + "Coste envio: " + String.valueOf(this.articulo.getGastosEnvio()) + "\n"
-           //  + "Pvp Total: " + String.valueOf(cantidad*this.articulo.getPvpVenta()) 
+             + "Pvp Articulo: " + String.valueOf(this.idArticuloPedido.getPvpVenta())  + "\n"
+             + "Coste envio: " + String.valueOf(this.idArticuloPedido.getGastosEnvio()) + "\n"
+             + "Pvp Total: " + String.valueOf(cantidad*this.idArticuloPedido.getPvpVenta()) 
                 + "\n";              
     }  
     

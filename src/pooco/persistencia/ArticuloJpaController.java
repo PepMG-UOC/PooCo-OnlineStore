@@ -15,24 +15,19 @@ import pooco.modelo.Articulo;
 import pooco.persistencia.exceptions.NonexistentEntityException;
 import pooco.persistencia.exceptions.PreexistingEntityException;
 
-
 public class ArticuloJpaController implements Serializable {
-    
+
     public ArticuloJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-    
-    public ArticuloJpaController(){
-        emf= Persistence.createEntityManagerFactory("PooCo-OnlineStorePU");
-    }
-    
+
     public EntityManager getEntityManager() {
-        
         return emf.createEntityManager();
     }
-
-    
+     public ArticuloJpaController(){
+        emf= Persistence.createEntityManagerFactory("PooCo-OnlineStorePU");
+    }
 
     public void create(Articulo articulo) throws PreexistingEntityException, Exception {
         if (articulo.getPedidoList() == null) {

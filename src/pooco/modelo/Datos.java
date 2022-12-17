@@ -73,7 +73,8 @@ public class Datos {
         pedido=new Pedido(numPedido,articulo,cantidad,cliente);
         
         try {
-            pedidoJPA.create(pedido);            
+            pedidoJPA.create(pedido);         
+            success = true;
             //success = dao.registrar(pedido);            
         } catch (Exception e) {
             success = false;

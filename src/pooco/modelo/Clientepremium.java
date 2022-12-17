@@ -95,15 +95,14 @@ public class Clientepremium implements Serializable {
         return true;
     }
 
- 
      
- //   @Override
+ 
     public float calcAnual() {
         return tarifaAnual=30f; 
     } 
     
     
- //   @Override
+ 
     public float descuentoEnv() {    
         return descuento=20f;    
     }

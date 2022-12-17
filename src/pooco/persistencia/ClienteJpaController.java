@@ -18,7 +18,6 @@ import pooco.persistencia.exceptions.IllegalOrphanException;
 import pooco.persistencia.exceptions.NonexistentEntityException;
 import pooco.persistencia.exceptions.PreexistingEntityException;
 
-
 public class ClienteJpaController implements Serializable {
 
     public ClienteJpaController(EntityManagerFactory emf) {
@@ -29,10 +28,11 @@ public class ClienteJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    public ClienteJpaController(){
+      public ClienteJpaController(){
         emf= Persistence.createEntityManagerFactory("PooCo-OnlineStorePU");
     }
-    
+
+
     public void create(Cliente cliente) throws PreexistingEntityException, Exception {
         if (cliente.getPedidoList() == null) {
             cliente.setPedidoList(new ArrayList<Pedido>());

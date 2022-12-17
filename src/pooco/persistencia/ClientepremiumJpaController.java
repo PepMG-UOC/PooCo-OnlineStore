@@ -22,14 +22,13 @@ public class ClientepremiumJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-    
-    public ClientepremiumJpaController() {
-          emf= Persistence.createEntityManagerFactory("PooCo-OnlineStorePU");
-    }
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
+   public ClientepremiumJpaController() {
+          emf= Persistence.createEntityManagerFactory("PooCo-OnlineStorePU");
+    }
     public void create(Clientepremium clientepremium) throws IllegalOrphanException, PreexistingEntityException, Exception {
         List<String> illegalOrphanMessages = null;
         Cliente clienteOrphanCheck = clientepremium.getCliente();

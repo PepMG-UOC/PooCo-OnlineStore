@@ -88,16 +88,12 @@ public class Clienteestandard implements Serializable {
         return true;
     }
 
-  //  @Override
-   
-    
- //   @Override
+
     public float calcAnual() {
         return tarifaAnual=0f; 
     } 
       
-      
-  //  @Override
+  
     public float descuentoEnv() {    
         return descuento=0f;    
     }

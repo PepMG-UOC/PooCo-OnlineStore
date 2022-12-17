@@ -26,7 +26,7 @@ public class ClienteestandardJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    public ClienteestandardJpaController(){
+        public ClienteestandardJpaController(){
         emf= Persistence.createEntityManagerFactory("PooCo-OnlineStorePU");
     }
 

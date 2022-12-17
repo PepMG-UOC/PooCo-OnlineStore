@@ -163,12 +163,10 @@ public class Controlador {
        }
        else if (datos.clienteTipoPRM(eMail)!=null ) {
            descuento= datos.clienteTipoPRM(eMail).getDescuento();
-       }
-        
+       }    
         
         cantidad =  pedidoVista.cantidadPedido();
-        pedidoVista.showpvpVenta(datos.getArticuloByCodigo(codigo).getPvpVenta(), cantidad);
-        
+        pedidoVista.showpvpVenta(datos.getArticuloByCodigo(codigo).getPvpVenta(), cantidad);        
         pedidoVista.showGastosEnvio(gastos, descuento);
         
         success = datos.setPedido(numPedido,datos.getArticuloByCodigo(codigo), cantidad, datos.clienteByEmail(eMail));
