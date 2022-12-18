@@ -77,7 +77,7 @@ public class Controlador {
                     añadirPedido();
                     break;
                 case '2':
-                //    eliminarPedido();
+                    eliminarPedido();
                     break;
                 case '3':                    
                 //    pedidosPendientes();
@@ -174,6 +174,25 @@ public class Controlador {
             pedidoVista.warning(numPedido,true);
             return;
         }
+    }
+    
+        public void eliminarPedido(){
+        int numPedido;              
+        pedidoVista.delCabecera();
+        numPedido = pedidoVista.numPedido();
+            if (datos.pedidoByNum(numPedido)==-1)
+            {
+                pedidoVista.warning(numPedido,false);
+                return;
+            } 
+        List lista = datos.getListaPedidos();
+            if(!datos.pedidoEnviado(lista, datos.pedidoByNum(numPedido))){
+                datos.eliminarPedido(numPedido); 
+                pedidoVista.eliminaOk(numPedido,true);           
+            } else {
+                pedidoVista.eliminaOk(numPedido,false);  
+            }
+         
     }
 
     private void muestraClientes() {        

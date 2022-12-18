@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.*;
+import java.util.Date;
 
 
 public class Datos {
@@ -64,7 +65,52 @@ public class Datos {
     }
     
     
+            public int pedidoByNum(int numPedido){
+        List<Pedido> lista = new ArrayList<>();
+        lista = getListaPedidos();
+        for(int item=0; item<(lista.size()); item++) {
+            if (numPedido==(lista.get(item).getIdPedido())){
+                  return item;
+            }
+          }
+          return -1;
+      } 
+
+
+    public void eliminarPedido(int numPedido){
+        try {
+        pedidoJPA.destroy(numPedido);
+    } catch (Exception e) {
+        
+    }
+    }
     
+    public List<Pedido> getListaPedidos(){              
+              
+        try {
+            List lista = pedidoJPA.findPedidoEntities();
+            return lista;
+        } catch (Exception e) {
+            throw new RuntimeException(e);            
+        }        
+    }
+
+        public boolean pedidoEnviado(List<Pedido> lista,int item){
+         Date fechahoraPedido;
+         LocalDateTime fechahoraAhora= LocalDateTime.now();  
+         int tiempoPrepara;
+         fechahoraPedido=lista.get(item).getFechaHora();
+         tiempoPrepara=lista.get(item).getIdArticuloPedido().getTiempoPreparacion();
+         
+         
+         Instant instant = fechahoraPedido.toInstant();
+         LocalDateTime fechahoraPedidoLocal = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+         
+         if (fechahoraPedidoLocal.plusMinutes(tiempoPrepara).isBefore(fechahoraAhora)) {
+            return true; 
+        }
+         return false;
+     }
 
 
     public boolean setPedido(int numPedido, Articulo articulo,int cantidad, Cliente cliente)
