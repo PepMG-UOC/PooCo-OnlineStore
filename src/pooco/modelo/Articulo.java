@@ -125,11 +125,11 @@ public class Articulo implements Serializable {
     @Override
     public String toString() {
         return  "ARTICULO" + "\n"
-                + "Codigo: " + this.idArticulo + "\n"
-                + "Descripcion: " + this.descripcion + "\n"
-                + "PVP de Venta: " + this.pvpVenta + "\n"
-                + "Gastos de envio: " + this.gastosEnvio + "\n"
-                + "Tiempo preparacion: " + this.tiempoPreparacion + " minutos.\n";
+                + "Codigo             : " + this.idArticulo + "\n"
+                + "Descripcion        : " + this.descripcion + "\n"
+                + "PVP de Venta       : " + this.pvpVenta + "\n"
+                + "Gastos de envio    : " + this.gastosEnvio + "\n"
+                + "Tiempo preparacion : " + this.tiempoPreparacion + " minutos.\n";
     }
     
 }

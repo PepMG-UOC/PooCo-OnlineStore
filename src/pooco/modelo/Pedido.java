@@ -27,7 +27,7 @@ public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "idPedido")
     private Integer idPedido;
@@ -120,17 +120,17 @@ public class Pedido implements Serializable {
     @Override
     public String toString(){
         return "\n" 
-             + "Numero de Pedido: " + this.idPedido + "\n"
-             + "Fecha y hora: " + this.fechaHora  + "\n"            
-             + "eMail del Cliente: " + this.ideMailPedido.getIdeMail() + "\n"
-             + "Nombre Cliente: " + this.ideMailPedido.getNombre() + "\n"
-             + "Codigo Articulo: " + this.idArticuloPedido.getIdArticulo() + "\n" 
+             + "Numero de Pedido    : " + this.idPedido + "\n"
+             + "Fecha y hora        : " + this.fechaHora  + "\n"            
+             + "eMail del Cliente   : " + this.ideMailPedido.getIdeMail() + "\n"
+             + "Nombre Cliente      : " + this.ideMailPedido.getNombre() + "\n"
+             + "Codigo Articulo     : " + this.idArticuloPedido.getIdArticulo() + "\n" 
              + "Descripcion Articulo: " + this.idArticuloPedido.getDescripcion() + "\n"
-             + "Cantidad: " + this.cantidad + "\n" 
-             + "Pvp Articulo: " + String.valueOf(this.idArticuloPedido.getPvpVenta())  + "\n"
-             + "Coste envio: " + String.valueOf(this.idArticuloPedido.getGastosEnvio()) + "\n"
-             + "Pvp Total: " + String.valueOf(cantidad*this.idArticuloPedido.getPvpVenta()) 
-                + "\n";              
+             + "Cantidad            : " + this.cantidad + "\n" 
+             + "Pvp Articulo        : " + String.valueOf(this.idArticuloPedido.getPvpVenta())  + "\n"
+             + "Total               : " + String.valueOf(cantidad*this.idArticuloPedido.getPvpVenta())  + "\n"
+             + "Coste envio         : " + String.valueOf(this.idArticuloPedido.getGastosEnvio()) + "\n"
+             + "\n";              
     }  
     
 }

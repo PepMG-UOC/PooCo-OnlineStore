@@ -65,24 +65,26 @@ public class Datos {
     }
     
     
-            public int pedidoByNum(int numPedido){
+    public int pedidoByNum(int numPedido){
         List<Pedido> lista = new ArrayList<>();
         lista = getListaPedidos();
         for(int item=0; item<(lista.size()); item++) {
             if (numPedido==(lista.get(item).getIdPedido())){
                   return item;
             }
-          }
-          return -1;
-      } 
+        }
+        return -1;
+    } 
 
 
-    public void eliminarPedido(int numPedido){
+    public boolean eliminarPedido(int numPedido){
         try {
-        pedidoJPA.destroy(numPedido);
-    } catch (Exception e) {
-        
-    }
+            pedidoJPA.destroy(numPedido);
+            return true;
+        } catch (Exception e) {
+             Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, e); 
+             return false;
+        }     
     }
     
     public List<Pedido> getListaPedidos(){              
@@ -95,22 +97,22 @@ public class Datos {
         }        
     }
 
-        public boolean pedidoEnviado(List<Pedido> lista,int item){
-         Date fechahoraPedido;
-         LocalDateTime fechahoraAhora= LocalDateTime.now();  
-         int tiempoPrepara;
-         fechahoraPedido=lista.get(item).getFechaHora();
-         tiempoPrepara=lista.get(item).getIdArticuloPedido().getTiempoPreparacion();
-         
-         
-         Instant instant = fechahoraPedido.toInstant();
-         LocalDateTime fechahoraPedidoLocal = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-         
-         if (fechahoraPedidoLocal.plusMinutes(tiempoPrepara).isBefore(fechahoraAhora)) {
+    public boolean pedidoEnviado(int item){
+        Date fechahoraPedido;
+        List<Pedido> lista= getListaPedidos();        
+        LocalDateTime fechahoraAhora= LocalDateTime.now();  
+        int tiempoPrepara;
+        fechahoraPedido=lista.get(item).getFechaHora();
+        tiempoPrepara=lista.get(item).getIdArticuloPedido().getTiempoPreparacion();
+
+        Instant instant = fechahoraPedido.toInstant();
+        LocalDateTime fechahoraPedidoLocal = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+        if (fechahoraPedidoLocal.plusMinutes(tiempoPrepara).isBefore(fechahoraAhora)) {
             return true; 
         }
-         return false;
-     }
+        return false;
+    }
 
 
     public boolean setPedido(int numPedido, Articulo articulo,int cantidad, Cliente cliente)
@@ -185,89 +187,47 @@ public class Datos {
         }
         return listaJoin;      
     }
-//
-//    public List<Pedido> getListaPedidos() {
-//        List<Pedido> lista = new ArrayList<>();
-//        DaoPedido dao = new PedidoDAOImpl();
-//        try {
-//            lista = dao.listarPedidos();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);                      
-//        }
-//        return lista; 
-//    }
-//
-//    public List<Pedido> getEnviadosByCliente(String eMail) {
-//        List<Pedido> listaCompleta = new ArrayList<>();
-//        List<Pedido> listaByCliente = new ArrayList<>();
-//        listaCompleta = getListaPedidos();
-//        for(int item=0; item<(listaCompleta.size()); item++){
-//            if(pedidoEnviado(listaCompleta, item)){
-//                if(listaCompleta.get(item).getCliente().geteMail().equals(eMail)){
-//                    listaByCliente.add(listaCompleta.get(item));                
-//                }                                
-//            }
-//        } 
-//        return listaByCliente;
-//    }
-//
-//    public List<Pedido> getPendienteByCliente(String eMail) {
-//        List<Pedido> listaCompleta = new ArrayList<>();
-//        List<Pedido> listaByCliente = new ArrayList<>();
-//        listaCompleta = getListaPedidos();
-//        for(int item=0; item<(listaCompleta.size()); item++){
-//            if(!pedidoEnviado(listaCompleta, item)){
-//                if(listaCompleta.get(item).getCliente().geteMail().equals(eMail)){
-//                    listaByCliente.add(listaCompleta.get(item));                
-//                }                                
-//            }
-//        } 
-//        return listaByCliente;
-//    }
-//
+
+    public List<Pedido> getEnviadosByCliente(String eMail) {
+        List<Pedido> listaCompleta = new ArrayList<>();
+        List<Pedido> listaByCliente = new ArrayList<>();
+        listaCompleta = getListaPedidos();
+        for(int item=0; item<(listaCompleta.size()); item++){
+            if(pedidoEnviado(item)){
+                if(listaCompleta.get(item).getIdeMailPedido().getIdeMail().equals(eMail)){
+                    listaByCliente.add(listaCompleta.get(item));                
+                }                                
+            }
+        } 
+        return listaByCliente;
+    }
+
+    public List<Pedido> getPendienteByCliente(String eMail) {
+        List<Pedido> listaCompleta = new ArrayList<>();
+        List<Pedido> listaByCliente = new ArrayList<>();
+        listaCompleta = getListaPedidos();
+        for(int item=0; item<(listaCompleta.size()); item++){
+            if(!pedidoEnviado(item)){
+                if(listaCompleta.get(item).getIdeMailPedido().getIdeMail().equals(eMail)){                       
+                    listaByCliente.add(listaCompleta.get(item));                
+                }                                
+            }
+        } 
+        return listaByCliente;
+    }
+
     public int getNumeroPedido(){
         int numPedido=0;        
         try {
-            numPedido = pedidoJPA.getPedidoCount();            
+            numPedido = pedidoJPA.getPedidoCount(); 
+            List<Pedido> lista = pedidoJPA.findPedidoEntities();
+            numPedido = lista.get(numPedido-1).getIdPedido();           
         } catch (Exception e) {
             throw new RuntimeException(e);            
         }
         return numPedido;
     }
-//
-//    public int pedidoByNum(int numPedido){
-//        List<Pedido> lista = new ArrayList<>();
-//        lista = getListaPedidos();
-//        for(int item=0; item<(lista.size()); item++) {
-//            if (numPedido==(lista.get(item).getNumPedido())){
-//                  return item;
-//            }
-//          }
-//          return -1;
-//      } 
-//    public boolean pedidoEnviado(List<Pedido> lista,int item){
-//         LocalDateTime fechahoraPedido;
-//         LocalDateTime fechahoraAhora= LocalDateTime.now();  
-//         int tiempoPrepara;
-//         fechahoraPedido=lista.get(item).getFechaYhora();
-//         tiempoPrepara=lista.get(item).getArticulo().getTiempoPreparacion();
-//         if (fechahoraPedido.plusMinutes(tiempoPrepara).isBefore(fechahoraAhora)) {
-//            return true; 
-//         }
-//         return false;
-//     }
-//
-//     public void borrarPedido(int id_Pedido) {
-//        DaoPedido dao= new PedidoDAOImpl();
-//        try
-//        {
-//            dao.borrarPedido(id_Pedido);
-//        } catch (Exception e) {
-//            throw  new RuntimeException(e);
-//        }
-//    }
-//        
-    
+   
     
     public Clienteestandard clienteTipoSTD(String eMail) {
         Cliente miCliente;
@@ -301,35 +261,7 @@ public class Datos {
             }
         }
         return null;    
-    }
+    }   
     
-    
-//    public Cliente cienteTipoByMail(String eMail) {
-//        Cliente miCliente;
-//        miCliente=clienteByEmail(eMail);      
-//        
-//        List<Clientepremium> listaPRM = new ArrayList<>();
-//        List<Clienteestandard> listaSTD = new ArrayList<>();        
-//        //List<Cliente> listaJoin = new ArrayList<>();        
-//        try {
-//            //lista = clienteJPA.findClienteEntities();
-//            listaSTD = clienteSTDJPA.findClienteestandardEntities();
-//            listaPRM = clientePRMJPA.findClientepremiumEntities();            
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);            
-//        }    
-//       
-//        for(int item=0; item<(listaSTD.size()); item++) {
-//            if(miCliente.getIdeMail().equals(listaSTD.get(item).getIdeMailestandard()) ) {   
-//               
-//                return listaSTD.get(item);             
-//            }
-//        }        
-//        for(int item=0; item<(listaPRM.size()); item++) {
-//            if(miCliente.getIdeMail().equals(listaPRM.get(item).getIdeMailPremium()) ) {
-//                return listaPRM.get(item);
-//            }            
-//        }            
-//        return null;          
-//   }
+
 }

@@ -80,10 +80,10 @@ public class Controlador {
                     eliminarPedido();
                     break;
                 case '3':                    
-                //    pedidosPendientes();
+                    pedidosPendientes();
                     break;
                 case '4':
-                //    pedidosEnviados();
+                    pedidosEnviados();
                     break;
 
                 }
@@ -156,8 +156,7 @@ public class Controlador {
             articuloView.warning(codigo,false);
             return;
         } 
-        gastos= datos.getArticuloByCodigo(codigo).getGastosEnvio();
-       // descuento = datos.clienteByEmail(eMail).descuentoEnv();
+        gastos= datos.getArticuloByCodigo(codigo).getGastosEnvio();       
        if (datos.clienteTipoSTD(eMail)!=null ) {
             descuento= datos.clienteTipoSTD(eMail).getDescuento();
        }
@@ -170,29 +169,23 @@ public class Controlador {
         pedidoVista.showGastosEnvio(gastos, descuento);
         
         success = datos.setPedido(numPedido,datos.getArticuloByCodigo(codigo), cantidad, datos.clienteByEmail(eMail));
-        if(!success) {
-            pedidoVista.warning(numPedido,true);
-            return;
-        }
+        pedidoVista.introducido(success);   
     }
     
-        public void eliminarPedido(){
-        int numPedido;              
+    public void eliminarPedido(){
+        int numPedido;  
+        boolean eliminado=false;
         pedidoVista.delCabecera();
         numPedido = pedidoVista.numPedido();
-            if (datos.pedidoByNum(numPedido)==-1)
-            {
-                pedidoVista.warning(numPedido,false);
-                return;
-            } 
-        List lista = datos.getListaPedidos();
-            if(!datos.pedidoEnviado(lista, datos.pedidoByNum(numPedido))){
-                datos.eliminarPedido(numPedido); 
-                pedidoVista.eliminaOk(numPedido,true);           
-            } else {
-                pedidoVista.eliminaOk(numPedido,false);  
-            }
-         
+        if (datos.pedidoByNum(numPedido)==-1)
+        {
+            pedidoVista.warning(numPedido,false);
+            return;
+        }         
+        if(!datos.pedidoEnviado(datos.pedidoByNum(numPedido))){
+            eliminado = datos.eliminarPedido(numPedido);                       
+        } 
+        pedidoVista.eliminaOk(numPedido,eliminado); 
     }
 
     private void muestraClientes() {        
@@ -225,134 +218,112 @@ public class Controlador {
             }         
         }
     }
-//  
-//    private void muestraArticulo() {
-//        String codigo;
-//        articuloView.showCabecera();
-//        codigo=articuloView.codigoArticulo();        
-//        if (datos.getArticuloByCodigo(codigo)!=null)
-//        {
-//            articuloView.showArticulo( datos.getArticulo().toString());
-//        } else articuloView.warning(codigo,false);
-//    }
-//
-//    public void pedidosPendientes(){
-//        pedidoVista.showPdteCabecera();        
-//        char resultado;
-//        boolean salir = false;
-//        do {
-//            resultado = pedidoVista.menuMostrar();
-//            switch (resultado) {
-//                case '1':
-//                    allPedidosPdte();
-//                    break;
-//                case '2':
-//                    pedidoPendienteFiltro();
-//                    break;
-//
-//                }
-//                if (resultado == '0') salir = true;
-//            } while (!salir);
-//        }
-//
-//    public void pedidosEnviados(){
-//        pedidoVista.showEnviosCabecera();        
-//        char resultado;
-//        boolean salir = false;
-//        do {
-//            resultado = pedidoVista.menuMostrar();
-//            switch (resultado) {
-//                case '1':
-//                    allPedidosEnviados();
-//                    break;
-//                case '2':
-//                    pedidoEnviadoFiltro();
-//                    break;
-//
-//                }
-//            if (resultado == '0') salir = true;
-//        } while (!salir);
-//    }
-//
-//    public void allPedidosPdte(){
-//        pedidoVista.showPdteCabecera();
-//        List lista = datos.getListaPedidos();
-//        for(int item=0; item<(lista.size()); item++){
-//            if(!datos.pedidoEnviado(lista, item)){
-//                pedidoVista.showPedido(lista.get(item).toString());                
-//            } 
-//        }
-//    }
-// 
-//    public void pedidoPendienteFiltro(){
-//        String eMail;
-//        eMail = clienteVista.eMailCliente();
-//        if (datos.clienteByEmail(eMail)==null)
-//        {
-//            clienteVista.warning(eMail,false);
-//            return;
-//        } 
-//        List lista = datos.getPendienteByCliente(eMail);          
-//        for(int item=0; item<(lista.size()); item++){           
-//            pedidoVista.showPedido(lista.get(item).toString());            
-//        }         
-//     } 
-//
-//    public void allPedidosEnviados(){
-//        pedidoVista.showEnviosCabecera();
-//        List lista = datos.getListaPedidos();
-//        for(int item=0; item<(lista.size()); item++){
-//            if(datos.pedidoEnviado(lista, item)){
-//                pedidoVista.showPedido(lista.get(item).toString());                
-//            } 
-//        }
-//    }
-//
-//    public void pedidoEnviadoFiltro(){
-//        String eMail;
-//        eMail = clienteVista.eMailCliente();
-//        if (datos.clienteByEmail(eMail)==null)
-//        {
-//            clienteVista.warning(eMail,false);
-//            return;
-//        } 
-//        List lista = datos.getEnviadosByCliente(eMail);          
-//        for(int item=0; item<(lista.size()); item++){           
-//            pedidoVista.showPedido(lista.get(item).toString());            
-//        }  
-//    }
-//
-//        
-//    public void eliminarPedido(){
-//        int numPedido;              
-//        pedidoVista.delCabecera();
-//        numPedido = pedidoVista.numPedido();
-//        if (datos.pedidoByNum(numPedido)==-1)
-//        {
-//            pedidoVista.warning(numPedido,false);
-//            return;
-//        } 
-//        List lista = datos.getListaPedidos();
-//        if(!datos.pedidoEnviado(lista, datos.pedidoByNum(numPedido))){
-//            datos.borrarPedido(numPedido); 
-//            pedidoVista.eliminaOk(numPedido,true);           
-//        } else {
-//            pedidoVista.eliminaOk(numPedido,false);  
-//        }
-//         
-//    }
-//     
-//    public int clienteByTipo(String tipo){
-//        for(int item=0; item<(datos.getListaClientes().size()); item++) {
-//            if (tipo.equals(datos.getListaClientes().get(item).tipoCliente())){
-//                return item;
-//            }
-//        }
-//        return -1;
-//    }
-//    
-// 
-    
+
+    public void pedidosPendientes(){
+        pedidoVista.showPdteCabecera();        
+        char resultado;
+        boolean salir = false;
+        do {
+            resultado = pedidoVista.menuMostrar();
+            switch (resultado) {
+                case '1':
+                    allPedidosPdte();
+                    break;
+                case '2':
+                    pedidoPendienteFiltro();
+                    break;
+
+                }
+                if (resultado == '0') salir = true;
+            } while (!salir);
+        }
+
+    public void pedidosEnviados(){
+        pedidoVista.showEnviosCabecera();        
+        char resultado;
+        boolean salir = false;
+        do {
+            resultado = pedidoVista.menuMostrar();
+            switch (resultado) {
+                case '1':
+                    allPedidosEnviados();
+                    break;
+                case '2':
+                    pedidoEnviadoFiltro();
+                    break;
+
+                }
+            if (resultado == '0') salir = true;
+        } while (!salir);
+    }
+
+    public void allPedidosPdte(){
+        pedidoVista.showPdteCabecera();
+        List lista = datos.getListaPedidos();
+        if (lista.size()>0) {
+            for(int item=0; item<(lista.size()); item++){
+                if(!datos.pedidoEnviado(item)){
+                    pedidoVista.showPedido(lista.get(item).toString()); 
+                } 
+            }
+        } else {
+            pedidoVista.nadaQmostrar("pendientes.");            
+        }
+        
+    }
+ 
+    public void pedidoPendienteFiltro(){
+        String eMail;
+        eMail = clienteVista.eMailCliente();
+        if (datos.clienteByEmail(eMail)==null)
+        {
+            clienteVista.warning(eMail,false);
+            return;
+        } 
+        List lista = datos.getPendienteByCliente(eMail); 
+        if (lista.size()>0) {
+            for(int item=0; item<(lista.size()); item++){           
+                pedidoVista.showPedido(lista.get(item).toString());            
+            }  
+        } else {
+            pedidoVista.nadaQmostrar("pendientes.");            
+        }                
+     } 
+
+    public void allPedidosEnviados(){
+        pedidoVista.showEnviosCabecera();
+        List lista = datos.getListaPedidos();
+        if (lista.size()>0) {
+            for(int item=0; item<(lista.size()); item++){
+                if(datos.pedidoEnviado(item)){
+                    pedidoVista.showPedido(lista.get(item).toString());                
+                } 
+            }    
+        } else {
+            pedidoVista.nadaQmostrar("enviados.");            
+        }  
+        
+    }
+
+    public void pedidoEnviadoFiltro(){
+        String eMail;
+        eMail = clienteVista.eMailCliente();
+        if (datos.clienteByEmail(eMail)==null)
+        {
+            clienteVista.warning(eMail,false);
+            return;
+        } 
+        List lista = datos.getEnviadosByCliente(eMail);  
+        if (lista.size()>0) {
+            for(int item=0; item<(lista.size()); item++){           
+                pedidoVista.showPedido(lista.get(item).toString());           
+            }
+        } else {
+            pedidoVista.nadaQmostrar("enviados.");            
+        }         
+          
+    }
+ 
    
     
 }

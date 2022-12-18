@@ -122,6 +122,11 @@ public class PedidoVista {
         System.out.println(); 
         //teclado.nextLine();
     }    
+    
+    public void introducido(boolean success) {
+        if(success) System.out.println("Introducido correctamente en BBDD");
+        else System.out.println("No se pudo guardar en BBDD");
+    }
 
     public void eliminaOk(int numPedido, boolean eliminado){
         if(eliminado) {
@@ -138,6 +143,10 @@ public class PedidoVista {
 
     public void showPedido(String pedido){
         System.out.println(pedido);
+    }
+    
+    public void nadaQmostrar(String tipoPedido) {
+        System.out.println("No existen pedidos " + tipoPedido);
     }
    
 }
