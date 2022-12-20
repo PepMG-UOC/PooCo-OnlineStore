@@ -122,8 +122,7 @@ public class Datos {
         
         try {
             pedidoJPA.create(pedido);         
-            success = true;
-            //success = dao.registrar(pedido);            
+            success = true;                      
         } catch (Exception e) {
             success = false;
             throw new RuntimeException(e);
@@ -135,8 +134,7 @@ public class Datos {
         return clienteJPA.findCliente(eMail);       
     }  
     
-    public List<Cliente> getListaClientes(){              
-        //Cliente cliente;        
+    public List<Cliente> getListaClientes(){     
         try {
             List lista = clienteJPA.findClienteEntities();
             return lista;

@@ -24,47 +24,46 @@ public class Controlador {
         this.datos = datos;
     }
     
-    /// MENUS 
     
-        public void menuArticulo() {
-        char resultado;
-        boolean salir = false;
-        do {
-            resultado = articuloView.menuPrincipal();
-            switch (resultado) {
-                case '1':
-                    añadirArticulo();
-                    break;
-                case '2':                    
-                    muestraArticulo();
-                    break;
-                }
-                if (resultado == '0') salir = true;
-            } while (!salir);
+    public void menuArticulo() {
+    char resultado;
+    boolean salir = false;
+    do {
+        resultado = articuloView.menuPrincipal();
+        switch (resultado) {
+            case '1':
+                añadirArticulo();
+                break;
+            case '2':                    
+                muestraArticulo();
+                break;
+            }
+            if (resultado == '0') salir = true;
+        } while (!salir);
     }
     
-        public void menuCliente() {
-        char resultado;
-        boolean salir = false;
-        do {
-            resultado = clienteVista.menuPrincipal();
-            switch (resultado) {
-                case '1':                    
-                    añadirCliente();
-                    break;
-                case '2':
-                    muestraClientes();
-                    break;
-                case '3':
-                    showClientesPorTipo("Estandard");
-                    break;
-                case '4':
-                    showClientesPorTipo("Premium");
-                    break;
+    public void menuCliente() {
+    char resultado;
+    boolean salir = false;
+    do {
+        resultado = clienteVista.menuPrincipal();
+        switch (resultado) {
+            case '1':                    
+                añadirCliente();
+                break;
+            case '2':
+                muestraClientes();
+                break;
+            case '3':
+                showClientesPorTipo("Estandard");
+                break;
+            case '4':
+                showClientesPorTipo("Premium");
+                break;
 
-                }
-                if (resultado == '0') salir = true;
-            } while (!salir);
+            }
+            if (resultado == '0') salir = true;
+        } while (!salir);
     }
 
     public void menuPedido(){
