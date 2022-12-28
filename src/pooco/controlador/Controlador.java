@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,19 +22,30 @@ public class Controlador {
     private ClienteVista clienteVista = new ClienteVista();  
     private PedidoVista pedidoVista = new PedidoVista();
     @FXML
-    private Button btnGestionArticulos;
+    private Button btnGestionArticulos;    
     @FXML
-    private Button btnGestionClientes;
+    private Button btnGestionClientes;    
     @FXML
     private Button btnGestionPedidos;
     @FXML
     private Button btnSalir;
     @FXML
-    private Button mostrarArticulo;
-//    @FXML
-//    private Button volverArticulo;
+    private Button btnMostrarArticulo;
     @FXML
-    private Button añadirArticulo;
+    private Button btnAddArticulo;
+    @FXML
+    private TextField txtId;
+    @FXML
+    private TextField txtDescripcion;
+    @FXML
+    private TextField txtPrecio;
+    @FXML
+    private TextField txtEnvio;
+    @FXML
+    private TextField txtPreparacion;
+    @FXML
+    private Button txtAñadir;
+    
     
     public Controlador() {       
         datos = new Datos ();       
@@ -51,7 +63,7 @@ public class Controlador {
     private void btnGestionArticulos(ActionEvent event) {
          try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/ArticuloVistaFX.fxml"));
+            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/MenuArticuloVistaFX.fxml"));
             Pane ventana = (Pane) loader.load();
 
             // Show the scene containing the root layout.
@@ -65,54 +77,86 @@ public class Controlador {
             System.out.println(e.getMessage());
         }
     }
-
-    @FXML
-    private void btnGestionClientes(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnGestionPedidos(ActionEvent event) {
-    }
     
     @FXML
+    private void btnGestionClientes(ActionEvent event) {
+        String tato="kk";
+    }
+
+    @FXML    
+    private void btnGestionPedidos(ActionEvent event) {
+        String tato="kk";
+    }
+
+    @FXML    
     private void btnSalir(ActionEvent event) {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
+
+    @FXML    
+    private void btnAddArticulo(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/AddArticuloVistaFX.fxml"));
+            Pane ventana = (Pane) loader.load();
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(ventana);
+            Stage stage=new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();     
+ 
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     @FXML
-    private void btnMostrarArticulo(ActionEvent event) {
+    private void addArticulo(ActionEvent event) {
+        int a=0;
+        a++;
+        
     }
-
-//    @FXML
-//    private void btnVolverArticulo(ActionEvent event) {
-//        Node source = (Node) event.getSource();
-//        Stage stage = (Stage) source.getScene().getWindow();
-//        stage.close();
+//    public void añadirArticulo()
+//    {
+//        boolean success=false;
+//        String codigo;
+//        articuloView.adCabecera();
+//        codigo = articuloView.codigoArticulo();
+//        if (datos.getArticuloByCodigo(codigo)==null) {
+//            success = datos.setArticulo(codigo, articuloView.descripcionArticulo(), articuloView.pvpVentaArticulo()
+//                ,articuloView.gastosEnvioArticulo(),articuloView.tiempoPreparacionArticulo());
+//        } else {
+//            articuloView.warning(codigo,true);
+//        }         
+//        articuloView.introducido(success);      
 //    }
 
-    @FXML
-    private void btnAddArticulo(ActionEvent event) {
-    }
+    @FXML    
+    private void btnMostrarArticulo(ActionEvent event) {
+        String tato="kk";
+    }  
 
  
-    public void menuArticulo() {
-    char resultado;
-    boolean salir = false;
-    do {
-        resultado = articuloView.menuPrincipal();
-        switch (resultado) {
-            case '1':
-                añadirArticulo();
-                break;
-            case '2':                    
-                muestraArticulo();
-                break;
-            }
-            if (resultado == '0') salir = true;
-        } while (!salir);
-    }
+//    public void menuArticulo() {
+//    char resultado;
+//    boolean salir = false;
+//    do {
+//        resultado = articuloView.menuPrincipal();
+//        switch (resultado) {
+//            case '1':
+//                añadirArticulo();
+//                break;
+//            case '2':                    
+//                muestraArticulo();
+//                break;
+//            }
+//            if (resultado == '0') salir = true;
+//        } while (!salir);
+//    }
     
     public void menuCliente() {
     char resultado;
@@ -160,22 +204,8 @@ public class Controlador {
                 }
                 if (resultado == '0') salir = true;
             } while (!salir);
-    }
+    }  
     
-    public void añadirArticulo()
-    {
-        boolean success=false;
-        String codigo;
-        articuloView.adCabecera();
-        codigo = articuloView.codigoArticulo();
-        if (datos.getArticuloByCodigo(codigo)==null) {
-            success = datos.setArticulo(codigo, articuloView.descripcionArticulo(), articuloView.pvpVentaArticulo()
-                ,articuloView.gastosEnvioArticulo(),articuloView.tiempoPreparacionArticulo());
-        } else {
-            articuloView.warning(codigo,true);
-        }         
-        articuloView.introducido(success);      
-    }
     
      private void muestraArticulo() {
         String codigo;
@@ -395,10 +425,6 @@ public class Controlador {
           
     }
 
- 
- 
-
-
-   
+       
     
 }
