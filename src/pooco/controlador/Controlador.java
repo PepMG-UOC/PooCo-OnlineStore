@@ -21,18 +21,18 @@ public class Controlador {
     private ArticuloVista articuloView = new ArticuloVista(); 
     private ClienteVista clienteVista = new ClienteVista();  
     private PedidoVista pedidoVista = new PedidoVista();
-    @FXML
-    private Button btnGestionArticulos;    
-    @FXML
-    private Button btnGestionClientes;    
-    @FXML
-    private Button btnGestionPedidos;
-    @FXML
-    private Button btnSalir;
-    @FXML
-    private Button btnMostrarArticulo;
-    @FXML
-    private Button btnAddArticulo;
+//    @FXML
+//    private Button btnGestionArticulos;    
+//    @FXML
+//    private Button btnGestionClientes;    
+//    @FXML
+//    private Button btnGestionPedidos;
+//    @FXML
+//    private Button btnSalir;
+//    @FXML
+//    private Button btnMostrarArticulo;
+//    @FXML
+//    private Button btnAddArticulo;
     @FXML
     private TextField txtId;
     @FXML
@@ -44,7 +44,10 @@ public class Controlador {
     @FXML
     private TextField txtPreparacion;
     @FXML
-    private Button txtAñadir;
+    private TextField txtResult;
+    
+//    @FXML
+//    private Button btnAñadir;
     
     
     public Controlador() {       
@@ -116,10 +119,37 @@ public class Controlador {
     
     @FXML
     private void addArticulo(ActionEvent event) {
-        int a=0;
-        a++;
-        
+        boolean success=false;
+        String codigo = txtId.getText();
+        if (codigo!="") {
+            String descripcionArticulo = txtDescripcion.getText();
+            Float pvpVentaArticulo = Float.parseFloat(txtPrecio.getText());
+            Float gastosEnvioArticulo = Float.parseFloat(txtEnvio.getText());
+            Integer tiempoPreparacionArticulo = Integer.parseInt(txtPreparacion.getText());
+            if (datos.getArticuloByCodigo(codigo)==null) {
+                success = datos.setArticulo(codigo, descripcionArticulo, pvpVentaArticulo
+                ,gastosEnvioArticulo,tiempoPreparacionArticulo);
+            } else {
+                txtResult.setVisible(true);
+                txtResult.setText("El Artículo " + codigo + " ya existe.");             
+            }  
+            if(success) {
+                txtResult.setVisible(true);
+                txtResult.setText("El Artículo " + codigo + " se ha introducido correctamente.");  
+            }
+        }
+        else {
+            txtResult.setVisible(true);
+            txtResult.setText("Debe insertar un código.");  
+        }      
+        txtId.setText("");
+        txtDescripcion.setText("");
+        txtPrecio.setText("");
+        txtEnvio.setText("");
+        txtPreparacion.setText("");
+                
     }
+
 //    public void añadirArticulo()
 //    {
 //        boolean success=false;
