@@ -1,8 +1,18 @@
 package pooco.controlador;
 
+import java.io.IOException;
 import pooco.modelo.Datos;
 import pooco.vista.*;
 import java.util.List;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class Controlador {
@@ -10,8 +20,21 @@ public class Controlador {
     private ArticuloVista articuloView = new ArticuloVista(); 
     private ClienteVista clienteVista = new ClienteVista();  
     private PedidoVista pedidoVista = new PedidoVista();
+    @FXML
+    private Button btnGestionArticulos;
+    @FXML
+    private Button btnGestionClientes;
+    @FXML
+    private Button btnGestionPedidos;
+    @FXML
+    private Button btnSalir;
+    @FXML
+    private Button mostrarArticulo;
+//    @FXML
+//    private Button volverArticulo;
+    @FXML
+    private Button añadirArticulo;
     
-
     public Controlador() {       
         datos = new Datos ();       
     }
@@ -24,7 +47,56 @@ public class Controlador {
         this.datos = datos;
     }
     
+    @FXML
+    private void btnGestionArticulos(ActionEvent event) {
+         try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/ArticuloVistaFX.fxml"));
+            Pane ventana = (Pane) loader.load();
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(ventana);
+            Stage stage=new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();     
+ 
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void btnGestionClientes(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnGestionPedidos(ActionEvent event) {
+    }
     
+    @FXML
+    private void btnSalir(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML
+    private void btnMostrarArticulo(ActionEvent event) {
+    }
+
+//    @FXML
+//    private void btnVolverArticulo(ActionEvent event) {
+//        Node source = (Node) event.getSource();
+//        Stage stage = (Stage) source.getScene().getWindow();
+//        stage.close();
+//    }
+
+    @FXML
+    private void btnAddArticulo(ActionEvent event) {
+    }
+
+ 
     public void menuArticulo() {
     char resultado;
     boolean salir = false;
@@ -322,7 +394,11 @@ public class Controlador {
         }         
           
     }
+
  
+ 
+
+
    
     
 }
