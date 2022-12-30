@@ -33,6 +33,7 @@ public class Controlador {
 //    private Button btnMostrarArticulo;
 //    @FXML
 //    private Button btnAddArticulo;
+    
     @FXML
     private TextField txtId;
     @FXML
@@ -146,9 +147,9 @@ public class Controlador {
         txtDescripcion.setText("");
         txtPrecio.setText("");
         txtEnvio.setText("");
-        txtPreparacion.setText("");
-                
+        txtPreparacion.setText("");                
     }
+    
 
 //    public void añadirArticulo()
 //    {
