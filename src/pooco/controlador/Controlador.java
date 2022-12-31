@@ -1,6 +1,7 @@
 package pooco.controlador;
 
 import java.io.IOException;
+import java.util.List;
 import pooco.modelo.Datos;
 import pooco.vista.*;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -58,6 +60,8 @@ public class Controlador {
     private RadioButton rdEstandar;
     @FXML
     private RadioButton rdPremium;
+    @FXML
+    private ListView listViewClientes;
     
     
     public Controlador() {       
@@ -313,18 +317,77 @@ public class Controlador {
     
     @FXML
     private void btnShowCliente(ActionEvent event) {
-        
+         try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/MostrarClientesVistaFX.fxml"));
+            Pane ventana = (Pane) loader.load();
+            
+            Scene scene = new Scene(ventana);
+            Stage stage=new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();     
+ 
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     @FXML
+    private void btnShowTodos(ActionEvent event) {
+        listViewClientes.getItems().clear();
+        List lista = datos.getListaClientes();
+        if (lista!=null){
+             for(int item=0; item<(lista.size()); item++) {
+                 listViewClientes.getItems().add(lista.get(item).toString());
+             }        
+          
+        }
+    
+    } 
+    
+    @FXML
     private void btnShowEstandar(ActionEvent event) {
-        
+        listViewClientes.getItems().clear();
+        List lista = datos.getListaClientesSTD();
+        if (lista!=null){
+             for(int item=0; item<(lista.size()); item++) {
+                 listViewClientes.getItems().add(lista.get(item).toString());
+             }         
+        }
     }
     
     @FXML
     private void btnShowPremium(ActionEvent event) {
-        
+        listViewClientes.getItems().clear();
+        List lista = datos.getListaClientesPRM();
+        if (lista!=null){
+             for(int item=0; item<(lista.size()); item++) {
+                 listViewClientes.getItems().add(lista.get(item).toString());
+             }         
+        }
     }
+    
+    //    private void showClientesPorTipo(String tipo){
+//        if (tipo.equals("Estandard")) {
+//            clienteVista.showCabeceraSTD();  
+//            List lista = datos.getListaClientesSTD();   
+//            if (lista!=null){
+//                for(int item=0; item<(lista.size()); item++) {
+//                    clienteVista.showClientes(lista.get(item).toString());
+//                }
+//            }         
+//        }
+//        else {
+//            clienteVista.showCabeceraPRM();  
+//            List lista = datos.getListaClientesPRM();   
+//            if (lista!=null){
+//                for(int item=0; item<(lista.size()); item++) {
+//                    clienteVista.showClientes(lista.get(item).toString());
+//                }
+//            }         
+//        }
+//    }
     
     @FXML
     private void btnAddPedido(ActionEvent event) {
@@ -511,26 +574,7 @@ public class Controlador {
 //        }  
 //    }
 //
-//    private void showClientesPorTipo(String tipo){
-//        if (tipo.equals("Estandard")) {
-//            clienteVista.showCabeceraSTD();  
-//            List lista = datos.getListaClientesSTD();   
-//            if (lista!=null){
-//                for(int item=0; item<(lista.size()); item++) {
-//                    clienteVista.showClientes(lista.get(item).toString());
-//                }
-//            }         
-//        }
-//        else {
-//            clienteVista.showCabeceraPRM();  
-//            List lista = datos.getListaClientesPRM();   
-//            if (lista!=null){
-//                for(int item=0; item<(lista.size()); item++) {
-//                    clienteVista.showClientes(lista.get(item).toString());
-//                }
-//            }         
-//        }
-//    }
+
 //
 //    public void pedidosPendientes(){
 //        pedidoVista.showPdteCabecera();        

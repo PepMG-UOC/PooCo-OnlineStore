@@ -10,12 +10,12 @@
     <children>
       <Pane prefHeight="450.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" layoutX="199.0" layoutY="29.0" prefHeight="70.0" prefWidth="203.0" text="Artículos" textAlignment="CENTER" textFill="#04611a" underline="true">
+            <Label alignment="CENTER" layoutX="199.0" layoutY="14.0" prefHeight="70.0" prefWidth="203.0" text="Artículos" textAlignment="CENTER" textFill="#04611a" underline="true">
                <font>
                   <Font name="Arial" size="46.0" />
                </font>
             </Label>
-            <Button fx:id="añadirArticulo" layoutX="131.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnAddArticulo" prefHeight="32.0" prefWidth="340.0" text="Añadir Artículo" textFill="#04611a">
+            <Button fx:id="añadirArticulo" layoutX="130.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnAddArticulo" prefHeight="32.0" prefWidth="340.0" text="Añadir Artículo" textFill="#04611a">
                <font>
                   <Font size="21.0" />
                </font>

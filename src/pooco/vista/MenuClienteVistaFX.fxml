@@ -15,22 +15,12 @@
                   <Font name="Arial" size="46.0" />
                </font>
             </Label>
-            <Button fx:id="añadirCliente" layoutX="130.0" layoutY="95.0" mnemonicParsing="false" onAction="#btnAddCliente" prefHeight="32.0" prefWidth="340.0" text="Añadir Cliente" textFill="#1509f2">
+            <Button fx:id="añadirCliente" layoutX="130.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnAddCliente" prefHeight="32.0" prefWidth="340.0" text="Añadir Cliente" textFill="#1509f2">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>            
-            <Button fx:id="mostrarCliente" layoutX="131.0" layoutY="160.0" mnemonicParsing="false" onAction="#btnShowCliente" prefHeight="32.0" prefWidth="340.0" text="Mostrar Clientes" textFill="#1509f2">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Button>
-            <Button fx:id="mostrarEstandar" layoutX="131.0" layoutY="230.0" mnemonicParsing="false" onAction="#btnShowEstandar" prefHeight="32.0" prefWidth="340.0" text="Mostrar Clientes Estándar" textFill="#1509f2">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Button>
-            <Button fx:id="mostrarPremium" layoutX="130.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnShowPremium" prefHeight="32.0" prefWidth="340.0" text="Mostrar Clientes Premium" textFill="#1509f2">
+            <Button fx:id="mostrarCliente" layoutX="130.0" layoutY="213.0" mnemonicParsing="false" onAction="#btnShowCliente" prefHeight="32.0" prefWidth="340.0" text="Mostrar Clientes" textFill="#1509f2">
                <font>
                   <Font size="21.0" />
                </font>
