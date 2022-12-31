@@ -7,30 +7,30 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pooco.controlador.Controlador">
-       <children>
-      <Pane layoutX="9.0" layoutY="3.0" prefHeight="450.0" prefWidth="600.0">
+    <children>
+      <Pane prefHeight="450.0" prefWidth="600.0">
          <children>
-            <Label layoutX="170.0" layoutY="24.0" prefHeight="53.0" prefWidth="244.0" text="OnlineStore" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="170.0" layoutY="24.0" prefHeight="53.0" prefWidth="244.0" text="OnlineStore" textAlignment="CENTER" underline="true">
                <font>
                   <Font name="Arial" size="46.0" />
                </font>
             </Label>
-            <Button fx:id="gestionArtculos" layoutX="122.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnGestionArticulos" prefHeight="32.0" prefWidth="340.0" text="Gestión Articulos">
+            <Button fx:id="gestionArtculos" layoutX="122.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnGestionArticulos" prefHeight="32.0" prefWidth="340.0" text="Gestión Articulos" textFill="#04611a">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="gestionClientes" layoutX="122.0" layoutY="168.0" mnemonicParsing="false" onAction="#btnGestionClientes" prefHeight="32.0" prefWidth="340.0" text="Gestión Clientes">
+            <Button fx:id="gestionClientes" layoutX="122.0" layoutY="168.0" mnemonicParsing="false" onAction="#btnGestionClientes" prefHeight="32.0" prefWidth="340.0" text="Gestión Clientes" textFill="#1509f2">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="gestionPedidos" layoutX="122.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnGestionPedidos" prefHeight="32.0" prefWidth="340.0" text="Gestión Pedidos">
+            <Button fx:id="gestionPedidos" layoutX="122.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnGestionPedidos" prefHeight="32.0" prefWidth="340.0" text="Gestión Pedidos" textFill="#be06ec">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button layoutX="122.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnSalir" prefHeight="32.0" prefWidth="340.0" text="Salir">
+            <Button layoutX="122.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnSalir" prefHeight="32.0" prefWidth="340.0" text="Salir" textFill="#ec0a0a">
                <font>
                   <Font size="21.0" />
                </font>
