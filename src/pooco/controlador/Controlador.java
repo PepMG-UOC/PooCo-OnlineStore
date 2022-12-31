@@ -3,13 +3,13 @@ package pooco.controlador;
 import java.io.IOException;
 import pooco.modelo.Datos;
 import pooco.vista.*;
-import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -53,9 +53,11 @@ public class Controlador {
     @FXML
     private TextField txtDomicilio;
     @FXML
-    private TextField txtNif;
+    private TextField txtNif;   
     @FXML
-    private TextField txtTipo;
+    private RadioButton rdEstandar;
+    @FXML
+    private RadioButton rdPremium;
     
     
     public Controlador() {       
@@ -176,7 +178,7 @@ public class Controlador {
             }  
             if(success) {
                 txtResult.setVisible(true);
-                txtResult.setText("El Artículo " + codigo + "\n" + "se ha introducido correctamente.");  
+                txtResult.setText("El Artículo " + codigo + "\n" + "se ha introducido \ncorrectamente.");  
             }
         }
         else {
@@ -196,8 +198,7 @@ public class Controlador {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(OnlineStore.class.getResource("/pooco/vista/MostrarArticuloVistaFX.fxml"));
             Pane ventana = (Pane) loader.load();
-
-            // Show the scene containing the root layout.
+          
             Scene scene = new Scene(ventana);
             Stage stage=new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -252,8 +253,7 @@ public class Controlador {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(OnlineStore.class.getResource("/pooco/vista/AddClienteVistaFX.fxml"));
             Pane ventana = (Pane) loader.load();
-
-            // Show the scene containing the root layout.
+            
             Scene scene = new Scene(ventana);
             Stage stage=new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -267,23 +267,26 @@ public class Controlador {
     
     @FXML
     private void addCliente(ActionEvent event) {
-         boolean success=false;
+        boolean success=false;
         String codigo = txteMail.getText();
+        String tipoCliente;
         if (codigo!="") {
             String nombreCliente = txtNombre.getText();
             String domicilioCliente = txtDomicilio.getText();
             String nifCliente = txtNif.getText();
-            String tipoCliente = txtTipo.getText();
+            if (rdEstandar.isSelected()) {
+                tipoCliente = "1";
+            } else tipoCliente = "2";
             
             if (datos.clienteByEmail(codigo)==null) {
                 success = datos.setCliente(codigo, nombreCliente, domicilioCliente, nifCliente, tipoCliente);
             } else {
                 txtResult.setVisible(true);
-                txtResult.setText("El Email " + codigo + " ya existe.");             
+                txtResult.setText("El Email " + codigo + "\nya existe.");             
             }  
             if(success) {
                 txtResult.setVisible(true);
-                txtResult.setText("El Email " + codigo + " se ha introducido correctamente.");  
+                txtResult.setText("El Email " + codigo + "\nse ha introducido \ncorrectamente.");  
             }
         }
         else {
@@ -294,7 +297,18 @@ public class Controlador {
         txtNombre.setText("");
         txtDomicilio.setText("");
         txtNif.setText("");
-        txtTipo.setText("");                
+                     
+    }
+    
+    @FXML
+    private void cambiaTipo(ActionEvent event) {
+        if (rdEstandar.isSelected()) {
+            rdEstandar.setSelected(false);
+            rdPremium.setSelected(true);
+        } else {
+            rdEstandar.setSelected(true);
+            rdPremium.setSelected(false);        
+        }
     }
     
     @FXML
@@ -314,20 +328,20 @@ public class Controlador {
     
     @FXML
     private void btnAddPedido(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/AddPedidoVistaFX.fml"));
-            Pane ventana = (Pane) loader.load();
-            
-            Scene scene = new Scene(ventana);
-            Stage stage=new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.showAndWait();     
- 
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/AddPedidoVistaFX.fml"));
+//            Pane ventana = (Pane) loader.load();
+//            
+//            Scene scene = new Scene(ventana);
+//            Stage stage=new Stage();
+//            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.setScene(scene);
+//            stage.showAndWait();     
+// 
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
     
     @FXML
@@ -337,20 +351,20 @@ public class Controlador {
 
     @FXML    
     private void btnEliminarPedido(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/EliminarPedidoFX.fml"));
-            Pane ventana = (Pane) loader.load();
-            
-            Scene scene = new Scene(ventana);
-            Stage stage=new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.showAndWait();     
- 
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(OnlineStore.class.getResource("/pooco/vista/EliminarPedidoFX.fml"));
+//            Pane ventana = (Pane) loader.load();
+//            
+//            Scene scene = new Scene(ventana);
+//            Stage stage=new Stage();
+//            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.setScene(scene);
+//            stage.showAndWait();     
+// 
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
     
     @FXML
